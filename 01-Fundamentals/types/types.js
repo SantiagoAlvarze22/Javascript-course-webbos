@@ -29,3 +29,27 @@ const html = `
 
 //adding html
 document.body.innerHTML = html;
+
+//Numbers 
+
+// / + - *     
+let concatenationNumber = 1 + "1";
+
+//output: "11"
+
+const person ={
+    first: 'Santi',
+    last: 'alvarez',
+    age: 29
+}
+
+//undefined 
+
+let cat;
+console.log(cat)
+
+//null 
+const carro= {
+    marca:null,
+    modelo: '23x4'
+}
