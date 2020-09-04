@@ -4,11 +4,20 @@ const people = [
   { name: 'Snickers', cool: false, country: 'Dog Country' },
 ];
 
+console.table(people);
 people.forEach((person, index) => {
   console.log(person.name);
+  //   console.groupCollapsed(`${person.name}`);
+  //   console.log(person.country);
+  //   console.log(person.name);
+  //   console.log('!Finish');
+  //   console.groupEnd(`${person.name}`);
 });
 
-// Console Methods
+// // Console Methods
+
+// console.table(people);
+// console.error(people.name);
 
 // Callstack
 
@@ -29,7 +38,7 @@ function doctorize(name) {
 }
 
 function greet(name) {
-  doesntExist();
+  doesntExist(); // cause an error
   return `Hello ${name}`;
 }
 
