@@ -47,5 +47,5 @@ const nice = document.querySelector('.nice');
 console.log(nice.dataset);
 
 nice.addEventListener('click', () =>
-  alert(`hola ${nice.description} ${nice.name}`)
+  alert(`hola ${nice.dataset.description} ${nice.dataset.name}`)
 );
