@@ -18,15 +18,34 @@
 
 // Classes !
 
-const pic = document.querySelector('.nice');
-pic.classList.add('open');
-pic.classList.remove('cool');
+// const pic = document.querySelector('.nice');
+// pic.classList.add('open');
+// pic.classList.remove('cool');
 
-console.log(pic.classList);
+// console.log(pic.classList);
 
-/* function is called, to calle the class round by a click and make the 
-//image corner round */
-function toggleRound() {
-  pic.classList.toggle('round');
-}
-pic.addEventListener('click', toggleRound);
+// /* function is called, to calle the class round by a click and make the
+// //image corner round */
+// function toggleRound() {
+//   pic.classList.toggle('round');
+// }
+// pic.addEventListener('click', toggleRound);
+
+// // attributes
+
+// pic.alt = 'cute Pup'; // setter
+// console.log(pic.alt); // getter
+// console.log(pic.naturalWidth); // getter
+// pic.width = 200; // assigning the value
+
+// pic.setAttribute('alt', 'linda foto');
+// console.log(pic.getAttribute('alt'));
+
+// accessing to data-attribute to class img nice cool
+
+const nice = document.querySelector('.nice');
+console.log(nice.dataset);
+
+nice.addEventListener('click', () =>
+  alert(`hola ${nice.description} ${nice.name}`)
+);
