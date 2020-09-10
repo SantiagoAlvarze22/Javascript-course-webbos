@@ -56,6 +56,7 @@ ul.insertAdjacentHTML('beforebegin', divHTML);
 // add a class to the second paragraph called warning
 const paragraphs = document.querySelector('.paragraphs');
 paragraphs.lastElementChild.classList.add('warning');
+// paragraphs.children[1].classList.add('warning');
 // remove the first paragraph
 paragraphs.firstElementChild.remove();
 
