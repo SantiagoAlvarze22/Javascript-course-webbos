@@ -30,3 +30,15 @@ signupForm.name.addEventListener('keyup', logEvent);
 signupForm.email.addEventListener('keydown', logEvent);
 signupForm.name.addEventListener('focus', logEvent);
 signupForm.name.addEventListener('blur', logEvent);
+
+const photo = document.querySelector('.photo');
+
+function handlePhotoClick() {
+  console.log('you clicked the photo');
+}
+// photo.addEventListener('click', function() {
+//   console.log('you clicked the photo');
+// });
+
+photo.addEventListener('click', handlePhotoClick);
+photo.addEventListener('keyup', handlePhotoClick);
