@@ -2,7 +2,7 @@
 const canvas = document.querySelector('#etch-a-sketch');
 const ctx = canvas.getContext('2d');
 const shakebutton = document.querySelector('.shake');
-const MOVE_AMOUNT = 10;
+const MOVE_AMOUNT = 30;
 let hue = 0;
 
 // setup our canvas for drawning
@@ -61,7 +61,22 @@ function handleKey(e) {
     draw({ key: e.key });
   }
 }
-// clear / shke function
+// clear / shake function
+function clearCanvas() {
+  canvas.classList.add('shake');
+  // clear the canvas
+  ctx.clearRect(0, 0, width, height);
+  canvas.addEventListener(
+    'animationend',
+    function() {
+      console.log('donde');
+      canvas.classList.remove('.shake');
+    },
+    { once: true }
+  );
+}
 
 // listen for arrow keys
 window.addEventListener('keydown', handleKey);
+
+shakebutton.addEventListener('click', clearCanvas);
