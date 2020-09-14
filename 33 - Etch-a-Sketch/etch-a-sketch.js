@@ -29,7 +29,7 @@ function draw({ key }) {
   // updating in every movement arrow the variable hue and change it the color automacally
   hue += 1;
   ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
-  console.log(key);
+
   // start the path
   ctx.beginPath();
   ctx.moveTo(x, y);
@@ -69,7 +69,6 @@ function clearCanvas() {
   canvas.addEventListener(
     'animationend',
     function() {
-      console.log('donde');
       canvas.classList.remove('.shake');
     },
     { once: true }
