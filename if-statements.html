@@ -9,6 +9,18 @@
 </head>
 
 <body>
+  <h2>Truthy values</h2>
+  *1
+  *full string
+  * -number
+  * a string of "0"
+  <h2>Falsty values</h2>
+  *0
+  *Undefined
+  *null
+  *NAN
+  *empty string
+
   <script>
     function slugify(sentence, lowercase) {
       const slug = sentence.replace(/\s/g, '-');
@@ -30,6 +42,108 @@
     if (isAwesomeName) {
       console.log('Super cool awesome name');
     }
+
+    // customize functions
+    // function nameIsAwesome(str, name) {
+    //   return str.includes(name);
+    // }
+
+    function nameIsAwesome(name) {
+      return 'awesome'.includes(name);
+    }
+
+    // using a function as a parameter of if-statement
+    if (nameIsAwesome('wes')) {
+      console.log('oe4o');
+    }
+
+    // falsy value with 0
+    const score = 0;
+    if (score) {
+      console.log('thre is a score already');
+    } else {
+      console.log('no score yet because is CERO');
+    }
+
+    // Undefine is falsy
+    let scoreU;
+    if (scoreU) {
+      console.log('thre is a score already');
+    } else {
+      console.log('no score yet because is undefined');
+    }
+
+    // NULL is falsy
+    const scoreN = null;
+    if (scoreN) {
+      console.log('thre is a score already');
+    } else {
+      console.log('no score yet because is NULL');
+    }
+
+    // empty string is falsy
+    const scoreE = '';
+    if (scoreE) {
+      console.log('thre is a score already');
+    } else {
+      console.log('no score yet because is empty string');
+    }
+
+    // NAN is falsy
+    const scoreNAN = 'HELLO' - 10;
+    if (scoreNAN) {
+      console.log('thre is a score already');
+    } else {
+      console.log('no score yet because is NAN');
+    }
+
+    // truthy value
+    const scoreT = 1;
+    if (scoreT) {
+      console.log('thre is a score already');
+    } else {
+      console.log('no score yet');
+    }
+
+    const scoreA = [];
+    if (scoreA) {
+      console.log('thre is a score already because is an empty array or full');
+    } else {
+      console.log('no score yet');
+    }
+
+    const scoreO = {};
+    if (scoreO) {
+      console.log('thre is a score already because is an empty obj or full');
+    } else {
+      console.log('no score yet');
+    }
+
+    // FULLSTRING
+    const scoreFu = 'HOLA';
+    if (scoreFu) {
+      console.log('thre is a score already because is a full string');
+    } else {
+      console.log('no score yet');
+    }
+
+    // string of CERO 0 is falsy
+    const scoreCero = '0';
+    if (scoreCero) {
+      console.log('thre is a score already because is a string of cero');
+    } else {
+      console.log('no score yet ');
+    }
+
+    const values = [[], {}, -10, 1, 0, '', 'full string', '', undefined, NaN, null];
+    console.group('truthy or falsy values');
+    values.forEach(value => {
+      if (value) {
+        console.log(value, 'is truthy');
+      } else {
+        console.log(value, 'is falsy');
+      }
+    });
   </script>
 </body>
 
