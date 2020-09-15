@@ -18,19 +18,39 @@
     setTimeout(buzzer, 500);
     console.log('finishing');
 
-    function setImmediateleInterval(funcToRun, ms) {
-      // right away call that function
-      funcToRun();
+    // function setImmediateleInterval(funcToRun, ms) {
+    //   // right away call that function
+    //   funcToRun();
 
-      // run a regular interval
-      return setInterval(funcToRun, ms);
-    }
+    //   // run a regular interval
+    //   return setInterval(funcToRun, ms);
+    // }
 
-    setImmediateleInterval(buzzer, 2000);
-    function sayHi() {
-      console.log('hiii');
+    // setImmediateleInterval(buzzer, 2000);
+    // function sayHi() {
+    //   console.log('hiii');
+    // }
+    // setImmediateleInterval(sayHi, 100);
+
+    function destroy() {
+      document.body.innerHTML = `<p>DESTROYED</p>`;
     }
-    setImmediateleInterval(sayHi, 100);
+    const bombTimer = setTimeout(destroy, 5000);
+
+    window.addEventListener('click', function () {
+      console.log('you clicked you save the world');
+      // how do I stop
+      clearTimeout(bombTimer);
+    });
+
+    const poopInterval = setInterval(function () {
+      console.log('hey');
+      console.log('heh');
+    }, 1000);
+
+    setTimeout(function () {
+      clearInterval(poopInterval);
+    }, 3000);
   </script>
 
 </body>
