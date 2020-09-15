@@ -17,6 +17,20 @@
     console.log('Starting');
     setTimeout(buzzer, 500);
     console.log('finishing');
+
+    function setImmediateleInterval(funcToRun, ms) {
+      // right away call that function
+      funcToRun();
+
+      // run a regular interval
+      return setInterval(funcToRun, ms);
+    }
+
+    setImmediateleInterval(buzzer, 2000);
+    function sayHi() {
+      console.log('hiii');
+    }
+    setImmediateleInterval(sayHi, 100);
   </script>
 
 </body>
