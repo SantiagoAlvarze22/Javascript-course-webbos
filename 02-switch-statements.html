@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title></title>
+  <link rel="stylesheet" href="../base.css">
+</head>
+
+<img src="./turtle.png" alt="Turt" class="turt">
+
+<body>
+  <style>
+    .turt {
+      position: relative;
+      --x: 0;
+      --y: 0;
+      --rotateX: 0;
+      --rotate: 0;
+      transform: translateX(var(--x)) translateY(var(--y)) rotateY(var(--rotateX)) rotate(var(--rotate));
+      transition: transform 0.2s;
+    }
+  </style>
+  <script>
+    const turtle = document.querySelector('.turt');
+    // para medir la ubicacion, punto de inicio
+    let x = 0;
+    let y = 0;
+    const speed = 10;
+    let flipped = false;
+    let rotate = 0;
+    function handleKeyDown(e) {
+      e.preventDefault();
+      // console.log(e.key); // tecla presionada
+      // if it's not an arrow key, we dont care
+      if (!e.key.includes('Arrow')) return;
+      switch (e.key) {
+        case 'ArrowUp':
+          y -= 1;
+          rotate = -90;
+          break;
+        case 'ArrowDown':
+          y += 1;
+          rotate = 90;
+          break;
+        case 'ArrowRight':
+          x += 1;
+          rotate = 0;
+          flipped = false;
+          break;
+        case 'ArrowLeft':
+          x -= 1;
+          rotate = 0;
+          flipped = true;
+          break;
+
+        default:
+          console.log('That is not a valid move');
+          break;
+      }
+      turtle.setAttribute(
+        'style',
+        `
+      --rotateX:${flipped ? '180deg' : '0'};
+      --x: ${x * speed}px;
+      --y: ${y * speed}px;
+      --rotate : ${rotate}deg;
+      `
+      );
+    }
+    window.addEventListener('keydown', handleKeyDown);
+  </script>
+</body>
+
+</html>

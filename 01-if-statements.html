@@ -29,6 +29,7 @@
       }
       return slug;
     }
+    slugify();
 
     const name = 'wes';
     const last = 'bos';
@@ -163,13 +164,13 @@
     const count = 20;
     const word = count === 1 ? 'item' : 'items';
     const sentence = `You have ${count} item${count === 1 ? '' : 's'}`;
-    console.log(sentence);
+    console.log(sentence, word);
 
     function showAdminBar() {
       console.log('holi');
     }
     const isAdmin = true;
-    isAdmin ? showAdminBar() : null;
+    // isAdmin ? showAdminBar() : null;
 
     function check1() {
       console.log('run check1');
