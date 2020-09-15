@@ -22,8 +22,8 @@
   *empty string
 
   <script>
-    function slugify(sentence, lowercase) {
-      const slug = sentence.replace(/\s/g, '-');
+    function slugify(sentence1, lowercase) {
+      const slug = sentence1.replace(/\s/g, '-');
       if (lowercase) {
         return slug.toLowerCase();
       }
@@ -48,8 +48,8 @@
     //   return str.includes(name);
     // }
 
-    function nameIsAwesome(name) {
-      return 'awesome'.includes(name);
+    function nameIsAwesome(name3) {
+      return 'awesome'.includes(name3);
     }
 
     // using a function as a parameter of if-statement
@@ -144,6 +144,61 @@
         console.log(value, 'is falsy');
       }
     });
+    console.groupEnd();
+    // console.clear();
+
+    // coeercion pas whichever thing into a REAL BOOLEAN
+    const isCool = true;
+    if (!isCool) {
+      console.log('You are not cool');
+    }
+
+    // Ternary
+    // 1. condition
+    // 2. what to do if true
+    // 3. What to do if false
+    const name1 = 'Santi';
+    const names = name1 ? 'eres el verdadero nombre' : 'no';
+    console.log(names);
+    const count = 20;
+    const word = count === 1 ? 'item' : 'items';
+    const sentence = `You have ${count} item${count === 1 ? '' : 's'}`;
+    console.log(sentence);
+
+    function showAdminBar() {
+      console.log('holi');
+    }
+    const isAdmin = true;
+    isAdmin ? showAdminBar() : null;
+
+    function check1() {
+      console.log('run check1');
+      return true;
+    }
+    function check2() {
+      console.log('run check2');
+      return true;
+    }
+    function check3() {
+      console.log('run check3');
+      return true;
+    }
+
+    if (check1() && check2() && check3()) {
+      console.log('all tests passed');
+    } else {
+      console.log('some check failed');
+    }
+
+    // isAdmin ? showAdminVar() :null;
+    // isAdmin && showAdminBar(); is like if the isAdmin is true so I'm goint to run de showAdminBar function
+    // because is several lines
+    if (isAdmin) {
+      showAdminBar();
+    }
+
+    // but if I want just do it in one line would be like this
+    if (isAdmin) showAdminBar();
   </script>
 </body>
 
