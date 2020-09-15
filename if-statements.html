@@ -11,11 +11,24 @@
 <body>
   <script>
     function slugify(sentence, lowercase) {
+      const slug = sentence.replace(/\s/g, '-');
       if (lowercase) {
-        return sentence.replace(/\s/g, '-') - lowercase();
+        return slug.toLowerCase();
       }
-      // else
-      return sentence.replace(/\s/g, '-');
+      return slug;
+    }
+
+    const name = 'wes';
+    const last = 'bos';
+
+    if (name === 'santi' || (name === 'wes' && last === 'bos')) {
+      console.log('Awesome name');
+    }
+
+    // to evaluate if a string has a word on it
+    const isAwesomeName = 'awesome'.includes(name);
+    if (isAwesomeName) {
+      console.log('Super cool awesome name');
     }
   </script>
 </body>
