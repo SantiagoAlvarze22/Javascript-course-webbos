@@ -49,6 +49,38 @@
     const name = nameInput ? nameInput.value : 'No existe el input';
     console.log(name);
     console.log(person.sayHello('Hola'));
+
+    // references
+    const name1 = 'wes';
+    const name2 = 'wes';
+    console.log(name1 === name2);
+
+    const person1 = {
+      first: 'wes',
+      last: 'bos',
+      clothing: {
+        pants: 1,
+        shirts: 2,
+      },
+    };
+
+    const person2 = {
+      first: 'wes',
+      last: 'bos',
+    };
+
+    // const person3 = person1;
+    // person3.first = 'Larry';
+
+    // spread operator to copy ever single one property and passed it to a new one variable, array, etc
+    const person3 = { ...person1 };
+    person3.first = 'santi';
+    console.log(person1);
+    console.log(person3);
+
+    // when I try to replace a object, arr, or a variable that is nested in the object or arr
+    // I can not do that bc the variable is going to replace the original arr
+    person3.clothing.shirts = 90;
   </script>
 </body>
 
