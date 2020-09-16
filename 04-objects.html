@@ -97,6 +97,22 @@
       ...veggieInventory,
       bread: 120,
     };
+    // variables like num, str, etc ar not modifier
+    function doStuff(data) {
+      data = 'something else';
+      console.log(data);
+    }
+
+    doStuff(name1);
+
+    // if I pass an object or and array and modify the object in that function the external object or arr would modify aswell
+
+    function doStuff2(data) {
+      data.tomatoes = 10000000;
+      console.log(data);
+    }
+
+    console.log(doStuff2(inventory));
   </script>
 </body>
 

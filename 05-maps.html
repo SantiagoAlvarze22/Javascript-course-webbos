@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Maps</title>
+  <link rel="stylesheet" href="../base.css">
+</head>
+
+<body>
+  <script>
+    const person = {
+      name: 'wes',
+      age: 200,
+    };
+
+    // i'm going to creat a Map
+    const myMap = new Map();
+    // .set()
+    myMap.set('name', 'wes');
+    myMap.set(100, 'This is a number');
+    myMap.set(person, 'really COOL');
+    console.log(myMap);
+
+    const score = 300;
+    const prizes = new Map();
+    prizes.set(100, 'Bear');
+    prizes.set(200, 'Duck');
+    prizes.set(300, 'Car');
+
+    console.log(`you win a ${prizes.get(score)}`);
+    // select that UL
+
+    const ul = document.querySelector('.prizes');
+    for (const [points, prize] of prizes) {
+      const li = `<li> ${points} - ${prize}</li>`;
+      ul.insertAdjacentHTML('beforeend', li);
+    }
+
+    // .has()
+    // .delete()
+  </script>
+</body>
+
+</html>
