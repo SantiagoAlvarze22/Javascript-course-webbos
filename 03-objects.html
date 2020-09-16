@@ -80,6 +80,23 @@
     // when I try to replace a object, arr, or a variable that is nested in the object or arr
     // I can not do that bc the variable is going to replace the original arr
     person3.clothing.shirts = 90;
+
+    // mix with the spread operator
+    const meatInvetory = {
+      bacon: 2,
+      sausage: 3,
+    };
+
+    const veggieInventory = {
+      lettuce: 5,
+      tomatoes: 3,
+    };
+
+    const inventory = {
+      ...meatInvetory,
+      ...veggieInventory,
+      bread: 120,
+    };
   </script>
 </body>
 
