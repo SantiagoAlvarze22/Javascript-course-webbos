@@ -10,6 +10,7 @@
 
 <body>
   <input type="text" name="first" value="Santi">
+  <script src="https://unpkg.com/lodash"></script>
   <script>
     const person = {
       age: 100,
@@ -73,10 +74,8 @@
     // person3.first = 'Larry';
 
     // spread operator to copy ever single one property and passed it to a new one variable, array, etc
-    const person3 = { ...person1 };
-    person3.first = 'santi';
-    console.log(person1);
-    console.log(person3);
+    // const person3 = { ...person1 };
+    const person3 = _.cloneDeep(person1);
 
     // when I try to replace a object, arr, or a variable that is nested in the object or arr
     // I can not do that bc the variable is going to replace the original arr
