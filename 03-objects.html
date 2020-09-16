@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title></title>
+  <link rel="stylesheet" href="../base.css">
+</head>
+
+<body>
+  <script>
+    const person = {
+      age: 100,
+      name: 'wes',
+      'cool-due': true,
+      'really cool': false,
+      '777': true,
+      clothing: {
+        pants: 1,
+        shirts: 2,
+      },
+    };
+
+    // add notation with de DOT
+    person.clothing.skirts = 3;
+
+    // overwriting a property
+    person.age = 50;
+    console.log(person);
+
+    // froze an object, never is going to change
+    // inmmuatable
+    const wesFroze = Object.freeze(person);
+
+    // acces property woth []
+
+    console.log(person['cool-due']);
+  </script>
+</body>
+
+</html>
