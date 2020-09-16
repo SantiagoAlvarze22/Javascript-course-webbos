@@ -9,16 +9,20 @@
 </head>
 
 <body>
+  <input type="text" name="first" value="Santi">
   <script>
     const person = {
       age: 100,
-      name: 'wes',
+      name: 'Santi',
       'cool-due': true,
       'really cool': false,
       '777': true,
       clothing: {
         pants: 1,
         shirts: 2,
+      },
+      sayHello(greeting = 'Hey') {
+        return `${greeting} ${this.name}`;
       },
     };
 
@@ -36,6 +40,15 @@
     // acces property woth []
 
     console.log(person['cool-due']);
+
+    // select the input
+    const nameInput = document.querySelector('[name = "first"]');
+    // const name = nameInput.value;
+
+    // in case like the input dont exist would be like this
+    const name = nameInput ? nameInput.value : 'No existe el input';
+    console.log(name);
+    console.log(person.sayHello('Hola'));
   </script>
 </body>
 
