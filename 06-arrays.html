@@ -26,11 +26,50 @@
     const names3 = ['poppy', ...names];
     console.log(names3);
 
-    //
+    const bikes = ['bianchi', 'miele', 'ponasonic', 'miyata'];
+    console.log(bikes);
+    const newBikes = [...bikes.slice(0, 2), 'benetto', ...bikes.slice(2)];
+    console.log(newBikes);
 
-    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    numbers.splice(3, 3); // start in the index of thre and remove 3 more
-    console.log(numbers);
+    // Now inf I want to remove it
+    const newBikes2 = [...newBikes.slice(0, 3), ...newBikes.slice(4)];
+    console.log(newBikes2);
+
+    //
+    const comments = [
+      { text: 'Cool Beans', id: 123 },
+      { text: 'LoveThis', id: 133 },
+      { text: 'Neato', id: 233 },
+      { text: 'Good bikes', id: 333 },
+      { text: 'So good', id: 433 },
+    ];
+
+    function deleteComment(id, comments) {
+      // first find the index of the item in the array
+      const commentIndex = comments.findIndex(comment => comment.id === id);
+      // make a new array without that item in it
+      return [
+        ...comments.slice(0, commentIndex),
+        ...comments.slice(commentIndex + 1),
+      ];
+      // return our new array
+    }
+
+    // looking for the position the key in the arr names
+    const kaitIndex = names.findIndex(name => name === 'kait');
+
+    const newNamesWithOutKait = [
+      // get everything up to kait index
+      ...names.slice(0, kaitIndex),
+      // everything after kait index
+      ...names.slice(kaitIndex + 1),
+    ];
+    console.log(kaitIndex);
+    console.log(newNamesWithOutKait);
+
+    // const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    // numbers.splice(3, 3); // start in the index of thre and remove 3 more
+    // console.log(numbers);
 
     // // Mutation method THEY DO CHANGE THE ORIGINAL DATA
     // const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
