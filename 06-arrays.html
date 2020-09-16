@@ -17,18 +17,33 @@
     console.log(names[names.length - 1]); // would return the last one Item in the array
     // last items
 
-    // Mutation method THEY DO CHANGE THE ORIGINAL DATA
-    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    /* Anytime you want to use a mutation method and NOT 
-    mutate the original array, I need to take a copy of the array with 
-    the spread operator */
-    const numbersReversed = [...numbers].reverse();
+    // add some info at the end of the array(push)//mutate the original array
+    names.push('lux');
+    console.log(names);
+    const names2 = [...names, 'lux'];
+    console.log(names2);
+    names.unshift('poppy');
+    const names3 = ['poppy', ...names];
+    console.log(names3);
 
-    console.log(numbersReversed);
+    //
+
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    numbers.splice(3, 3); // start in the index of thre and remove 3 more
     console.log(numbers);
-    // Mutuable example THEY DO NOT CHANGE THE ORGINAL DATA
-    const pizzaSlice = numbers.slice(2, 4);
-    console.log(pizzaSlice);
+
+    // // Mutation method THEY DO CHANGE THE ORIGINAL DATA
+    // const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    // /* Anytime you want to use a mutation method and NOT
+    // mutate the original array, I need to take a copy of the array with
+    // the spread operator */
+    // const numbersReversed = [...numbers].reverse();
+
+    // console.log(numbersReversed);
+    // console.log(numbers);
+    // // Mutuable example THEY DO NOT CHANGE THE ORGINAL DATA
+    // const pizzaSlice = numbers.slice(2, 4);
+    // console.log(pizzaSlice);
   </script>
 </body>
 
