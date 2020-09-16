@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>
+
+  </title>
+  <link rel="stylesheet" href="../base.css">
+</head>
+
+<body>
+  <script>
+    const names = ['wes', 'kait', 'snickers'];
+    console.log(names[0]);
+    console.log(names[names.length - 1]); // would return the last one Item in the array
+    // last items
+
+    // Mutation method THEY DO CHANGE THE ORIGINAL DATA
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    /* Anytime you want to use a mutation method and NOT 
+    mutate the original array, I need to take a copy of the array with 
+    the spread operator */
+    const numbersReversed = [...numbers].reverse();
+
+    console.log(numbersReversed);
+    console.log(numbers);
+    // Mutuable example THEY DO NOT CHANGE THE ORGINAL DATA
+    const pizzaSlice = numbers.slice(2, 4);
+    console.log(pizzaSlice);
+  </script>
+</body>
+
+</html>
