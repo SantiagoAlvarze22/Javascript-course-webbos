@@ -75,7 +75,7 @@
     console.log(Object.keys(meats));
     console.log(Object.values(meats));
 
-    Object.entries(meats).forEach(meat => console.log(meat));
+    Object.keys(meats).forEach(meat => console.log(meat));
 
     // or
 
@@ -91,23 +91,57 @@
     */
 
     // Display all bun types with " or " - use join()
+    console.log(buns.join(' or '));
 
     // We have a string "hot dogs,hamburgers,sausages,corn" - use split() to turn it into a string
+    const foodStr = 'hot dogs,hamburgers,sausages,corn';
+    console.log(foodStr.split(', ').join(' '));
 
     // take the last item off toppings with pop()
+    const lastItem = toppings.pop();
+    console.log(lastItem);
     // add it back with push()
+    toppings.push(lastItem);
+    console.log(toppings);
     // take the first item off toppings with shift()
+    const firstItem = toppings.shift();
+    console.log(firstItem);
+
     // add it back in with unshift()
+    console.log(toppings.unshift(firstItem));
+
     // Do the last four,but immutable (with spreads and new variables)
+    let newToppings = toppings.slice(0, toppings.length - 1);
+    newToppings = [...newToppings, toppings[toppings.length - 1]];
+    console.log(newToppings);
 
     // Make a copy of the toppings array with slice()
+    const toppingsCopy = toppings.slice(0);
+    toppings[0] = 'holi';
+    console.log(toppings);
+    console.log(toppingsCopy);
     // Make a copy of the toppings array with a spread
+    const toppingsCopy2 = [...toppings];
+    console.log(toppingsCopy2);
     // take out items 3 to 5 of your new toppings array with splice()
+    toppingsCopy.splice(3, 5);
+    console.log(toppingsCopy);
     // find the index of Avocado with indexOf() / lastIndexOf()
+    const avoIndex = toppings.indexOf('Avocado');
+    console.log(avoIndex);
     // Check if hot sauce is in the toppings with includes()
+    const inInToppings = toppings.includes('Hot Sauce');
+    console.log(inInToppings);
     // add it if it's not
+    if (!inInToppings) {
+      toppings.push('Hot Sauce');
+    }
+    console.log(toppings);
     // flip those toppings around with reverse()
-
+    toppings.reverse();
+    // another way would be
+    const toppingsReversed = [...toppings].reverse();
+    console.log(toppingsReversed);
     /*
       Callback Methods
     */
