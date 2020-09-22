@@ -145,18 +145,97 @@
     /*
       Callback Methods
     */
+    // function findBurgRating(singleFeedback) {
+    //   return singleFeedback.comment.includes('burg');
+    // }
+
+    // another way to store function would be creating an object
+    // I just need to call this object and work with it
+    // const util = {
+    //   findBurgRating: function (singleFeedback) {
+    //     retunr singleFeedback.comment.includes('burg')
+    //   }
+    // }
+
+    // const findBurgRating = singleFeedback =>
+    //   singleFeedback.comment.includes('burg');
+
+    // Now if I want to create higher function expression I can return for a function another function
+    function findByWord(word) {
+      return function (singleFeedback) {
+        return singleFeedback.comment.includes(word);
+      };
+    }
 
     // find the first rating that talks about a burger with find()
+    const burgRating = feedback.find(findByWord('burg'));
+    const smoothieRating = feedback.find(findByWord('Smoothie'));
+    console.log(smoothieRating);
+
     // find all ratings that are above 2 with filter()
+
+    function filterByMinRating(minRating) {
+      return function (singleFeedback) {
+        return singleFeedback.rating > minRating;
+      };
+    }
+    const goodReviews = feedback.filter(filterByMinRating(2));
+    // const goodReviews = feedback.filter(
+    //   singleFeedback => singleFeedback.rating > 2
+    // );
+
+    console.log(goodReviews);
+
     // find all ratings that talk about a burger with filter()
+    const burgRatings = feedback.filter(findByWord('burg'));
+    console.table(burgRatings);
+
     // Remove the one star rating however you like!
+    const legitRatings = feedback.filter(single => single.rating !== 1);
+    console.table(legitRatings);
 
     // check if there is at least 5 of one type of meat with some()
-    // make sure we have at least 3 of every meat with every()
-    // sort the toppings alphabetically with sort()
-    // sort the order totals from most expensive to least with .sort()
-    // Sort the prices with sort()
+    const istheremeat = Object.values(meats).some(meatValue => meatValue >= 5); // convert into an array, return true or false
+    console.log(istheremeat);
 
+    // make sure we have at least 3 of every meat with every()
+    const isatleastthree = Object.values(meats).every(meatValue => meatValue >= 3); // convert into an array, return true or false
+    console.log(isatleastthree);
+
+    // sort the toppings alphabetically with sort()
+    const orderToppings = toppings.sort();
+    console.log(orderToppings);
+
+    const numbers = [1, 2, 100, 3, 200, 400, 155];
+    const numerbsSorted = numbers.sort(
+      (a, b) => a - b
+      // if (a > b) {
+      //   return 1;
+      // }
+      // if (b > a) {
+      //   return -1;
+      // }
+      // return 0;
+
+      // second way => return a -b
+    );
+    console.log(numerbsSorted);
+    // sort the order totals from most expensive to least with .sort()
+    const orderTotal = orderTotals.sort((a, b) => a - b);
+    console.log(orderTotal);
+    // Sort the prices with sort()
+    const sortPrices = Object.values(prices).sort((a, b) => a - b);
+    console.log(sortPrices);
+
+    const productSortedByPrice = Object.entries(prices).sort((a, b) => {
+      const aPrice = a[1];
+      const bPrice = b[1];
+      return aPrice - bPrice;
+    });
+
+    console.table(productSortedByPrice);
+    // if I want to turn into a object again
+    console.table(Object.fromEntries(productSortedByPrice));
     /*
       Looping Methods (next)
     */
