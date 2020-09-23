@@ -159,6 +159,77 @@
     }
     toppings.forEach(logTopping);
     // toppings.forEach(topping => console.log(topping));
+    console.clear();
+
+    // map
+    function addArms(yola) {
+      return `hola cara:${yola}`;
+    }
+    const toys = faces.map(addArms);
+
+    console.log(toys);
+
+    // function para agregar el apellido
+    function fullName(name) {
+      return `${name} Wes`;
+    }
+
+    // another function to maket the first letter capital
+    // primera letra en mayuscula de cada nombre y continual con el el texto, desde la primera posicion hasta la final
+    function firstCapitalLetter(word) {
+      return `${word[0].toUpperCase()}${word.slice(1)}`;
+    }
+
+    const fullNames = ['wes', 'kait', 'poppy']
+      .map(firstCapitalLetter)
+      .map(fullName);
+    console.log(fullNames);
+
+    const orderTotalWithTx = orderTotals.map(total => total * 1.13);
+    console.log(orderTotalWithTx);
+
+    const cleanPeople = people.map(person => {
+      // get their birthday, because de date is giving a string
+      // timestamp
+
+      // now timestamp
+      const birthday = new Date(person.birthday).getTime();
+      const now = Date.now();
+      const age = Math.floor((now - birthday) / 31536000000);
+
+      // console.log(birthday, now);
+      // console.dir(birthday); // to see the methods inside Date object
+      // figure out how old they are
+      // return their full name and bday in an object
+      return {
+        age,
+        name: `${person.names.first} ${person.names.last}`,
+      };
+    });
+
+    console.table(cleanPeople);
+
+    // filter and find
+
+    const over40 = cleanPeople.filter(person => person.age > 40);
+    console.table(over40);
+
+    // using find
+    // Hi order function that return another function
+    function findById(id) {
+      return function isStudent(student) {
+        return student.id === id;
+      };
+    }
+
+    function findByProp(prop, value) {
+      return function (student) {
+        return student[prop] === value;
+      };
+    }
+    const student = students.find(findByProp('id', '565a'));
+    const student2 = students.find(findByProp('first_name', 'Flory'));
+    console.log(student2);
   </script>
 </body>
 
