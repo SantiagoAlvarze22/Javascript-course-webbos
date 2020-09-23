@@ -230,6 +230,37 @@
     const student = students.find(findByProp('id', '565a'));
     const student2 = students.find(findByProp('first_name', 'Flory'));
     console.log(student2);
+    console.clear();
+
+    // Reduce
+    // tally in this case would be the accumlator
+    function tallyNumbers(tally, currentTotal) {
+      console.log(`the current tally is ${tally}`);
+      console.log(`the current total is ${currentTotal}`);
+      console.log('-------');
+      return tally + currentTotal;
+    }
+    // 0 woulñd be the first value, and then is going to keep addintion it
+    const allOrders = orderTotals.reduce(tallyNumbers, 0);
+
+    console.log(allOrders);
+
+    function inventoryReducer(totals, item) {
+      console.log(`looping over ${item.type}`);
+      // increment the type by 1
+      totals[item.type] = totals[item.type] + 1 || 1;
+
+      // totals[item.type]  ? totals[item.type]  + 1 : (totals[item.type]  = 1);
+      // return the totals, so the next loop can use it
+      return totals;
+    }
+
+    const inventoryCounts = inventory.reduce(inventoryReducer, {});
+    console.log(inventoryCounts);
+
+    const totalInvetoryPrice = inventory.reduce((acc, item) => acc + item.price, 0);
+    console.log(totalInvetoryPrice);
+    // fin reduce
   </script>
 </body>
 
