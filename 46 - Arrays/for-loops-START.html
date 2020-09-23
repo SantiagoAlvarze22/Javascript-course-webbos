@@ -24,11 +24,36 @@
     // }
 
     // For of
-    for (const letter of name) {
-      console.log(letter);
+    // for (const letter of name) {
+    //   console.log(letter);
+    // }
+
+    // For in --> is used for looping over keys of an object
+    for (const number in numbers) {
+      console.log(number);
     }
 
-    // For in
+    const baseHumanStats = {
+      feet: 2,
+      arms: 2,
+      eyes: 2,
+      head: 1,
+    };
+
+    function Human(name1) {
+      this.name1 = name1;
+    }
+
+    Human.prototype = baseHumanStats;
+
+    // crear nueva instncia del objeto Human
+    const wes2 = new Human('wes');
+
+    console.log(Object.entries(wes2));
+
+    for (const prop in wes2) {
+      console.log(prop);
+    }
 
     // While Loop
   </script>
