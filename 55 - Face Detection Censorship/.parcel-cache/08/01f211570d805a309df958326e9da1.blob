@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Censorship</title>
-  <link rel="stylesheet" href="/base.b3373344.css">
+  <link rel="stylesheet" href="51f5e2d63909b77744d5a5c01b5dd27e">
   <style data-parcel-key="f5231531f9e8ccaeab36b88bc1067b45">
     * {
       box-sizing: border-box;
@@ -35,14 +35,14 @@
 </head>
 
 <body>
-  <div class="controls">
+  <div class="constrols">
     <label for="SCALE">
       SCALE:
       <input value="1.35" type="range" name="SCALE" min="0.3" max="3" step="0.1">
     </label>
     <label for="SIZE">
       SIZE:
-      <input value="10" type="range" name="SIZE" min="1" max="100" step="1">
+      <input value="10" type="range" name="SIZE" min="1" max="100" step="0.1">
     </label>
   </div>
   <div class="wrap">
@@ -50,7 +50,7 @@
     <canvas class="video"></canvas>
     <canvas class="face"></canvas>
   </div>
-  <script src="/pixelated-face.02fa2bbb.js"></script>
+  <script src="21fbbe6c30dc5f0f65730920173d90f4"></script>
 
 
 

@@ -8,8 +8,18 @@ const ctx = canvas.getContext('2d');
 
 const faceCanvas = document.querySelector('.face');
 const faceCtx = faceCanvas.getContext('2d');
-const SIZE = 10;
-const SCALE = 1.5;
+const optionsInput = document.querySelectorAll('.controls input[type="range"]');
+
+const options = {
+  SIZE: 10,
+  SCALE: 1.3,
+};
+function handleOption(e) {
+  const { value, name } = e.currentTarget;
+  options[name] = parseFloat(value);
+}
+
+optionsInput.forEach(input => input.addEventListener('input', handleOption));
 
 // creating a new face detector
 const faceDetector = new window.FaceDetector();
@@ -51,8 +61,8 @@ function censor({ boundingBox: face }) {
   // para limpiarlo cada vez que se lea una cara
   faceCtx.clearRect(0, 0, faceCanvas.width, faceCanvas.height);
   // draw the small face
-  const width = face.width * SCALE;
-  const height = face.height * SCALE;
+  const width = face.width * options.SCALE;
+  const height = face.height * options.SCALE;
   faceCtx.drawImage(
     // 5 source args
     video, // where does the source come from??
@@ -63,8 +73,8 @@ function censor({ boundingBox: face }) {
     // 4 draw args
     face.x,
     face.y,
-    SIZE,
-    SIZE
+    options.SIZE,
+    options.SIZE
   );
   // take that face back out and draw it back at normal size
   // DRAW the small face back on, but scale up
@@ -72,8 +82,8 @@ function censor({ boundingBox: face }) {
     faceCanvas, // source
     face.x, // where do we start the source pull from?
     face.y,
-    SIZE,
-    SIZE,
+    options.SIZE,
+    options.SIZE,
     // Drawingn arguments
     face.x - (width - face.width) / 2,
     face.y - (width - face.height) / 2,
