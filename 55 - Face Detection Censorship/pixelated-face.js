@@ -7,7 +7,9 @@ const canvas = document.querySelector('.video');
 const ctx = canvas.getContext('2d');
 
 const faceCanvas = document.querySelector('.face');
-const faceCtx = canvas.getContext('2d');
+const faceCtx = faceCanvas.getContext('2d');
+const SIZE = 10;
+const SCALE = 1.5;
 
 // creating a new face detector
 const faceDetector = new window.FaceDetector();
@@ -31,6 +33,7 @@ async function detect() {
   const faces = await faceDetector.detect(video);
   // ask the browser when the next animation frame is, and tell it to run detect for us
   faces.forEach(drawFace);
+  faces.forEach(censor);
   requestAnimationFrame(detect);
   // console.log(faces.length);
 }
@@ -41,6 +44,42 @@ function drawFace(face) {
   ctx.lineWidth = 2;
   ctx.strokeStyle = '#ffc600';
   ctx.strokeRect(left, top, width, height);
+}
+
+function censor({ boundingBox: face }) {
+  faceCtx.imageSmoothingEnabled = false;
+  // para limpiarlo cada vez que se lea una cara
+  faceCtx.clearRect(0, 0, faceCanvas.width, faceCanvas.height);
+  // draw the small face
+  const width = face.width * SCALE;
+  const height = face.height * SCALE;
+  faceCtx.drawImage(
+    // 5 source args
+    video, // where does the source come from??
+    face.x, // where do we start the source pull from
+    face.y,
+    face.width,
+    face.height,
+    // 4 draw args
+    face.x,
+    face.y,
+    SIZE,
+    SIZE
+  );
+  // take that face back out and draw it back at normal size
+  // DRAW the small face back on, but scale up
+  faceCtx.drawImage(
+    faceCanvas, // source
+    face.x, // where do we start the source pull from?
+    face.y,
+    SIZE,
+    SIZE,
+    // Drawingn arguments
+    face.x - (width - face.width) / 2,
+    face.y - (width - face.height) / 2,
+    width,
+    height
+  );
 }
 
 populateVideo().then(detect);
