@@ -17,12 +17,23 @@ const filters = {
     // if it is event, it will return zero and we will lowecase it
     return letter.toLowerCase();
   },
-  funky() {
+  funky(letter) {
     // first check if there is a funcky letter for this case
+    let funkyLetter = funkyLetters[letter];
+    if (funkyLetter) return funkyLetter;
     // if thenre funckyletters
+    funkyLetter = funkyLetters[letter.toLowerCase()];
+    if (funkyLetter) return funkyLetter;
     // if there is nothis, return regular letters
+    return letter;
   },
-  unable() {},
+  unable(letter) {
+    const random = Math.floor(Math.random() * 3);
+    if (letter === ' ' && random === 2) {
+      return '...';
+    }
+    return letter;
+  },
 };
 
 function transformText(text) {
@@ -37,3 +48,9 @@ function transformText(text) {
 }
 
 textarea.addEventListener('input', e => transformText(e.target.value));
+
+filterInputs.forEach(input =>
+  input.addEventListener('input', () => {
+    transformText(textarea.value);
+  })
+);
