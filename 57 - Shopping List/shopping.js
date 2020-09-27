@@ -20,6 +20,22 @@ function handleSubmit(e) {
   items.push(item);
   // clear the form when I hit the button add item
   e.target.reset();
+  // fire off a custom even that will tell anyone else who cares that the items have been updated
+  list.dispatchEvent(new CustomEvent('itemsUpdated'));
+}
+function displayItems() {
+  const html = items
+    .map(
+      item => `<li class="shopping-item">
+        <input type="checkbox">
+        <span class="itemName">${item.name}</span>
+        <button aria-label="remove ${item.name}">&times;</button>
+      </li>`
+    )
+    .join('');
+
+  list.innerHTML = html;
 }
 
 shoppingForm.addEventListener('submit', handleSubmit);
+list.addEventListener('itemsUpdated', displayItems);
