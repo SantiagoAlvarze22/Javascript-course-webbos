@@ -37,5 +37,11 @@ function displayItems() {
   list.innerHTML = html;
 }
 
+function mirrorToLocalStorage() {
+  console.log('yas');
+  localStorage.setItem('items', JSON.stringify(items));
+}
+
 shoppingForm.addEventListener('submit', handleSubmit);
 list.addEventListener('itemsUpdated', displayItems);
+list.addEventListener('itemsUpdated', mirrorToLocalStorage);
