@@ -19,6 +19,16 @@ function Gallery(gallery) {
     modal.classList.add('open');
   }
 
+  function closeModal() {
+    modal.classList.remove('open');
+  }
+
+  function handleClickOutside(e) {
+    if (e.target === e.currentTarget) {
+      closeModal();
+    }
+  }
+
   function showImage(el) {
     if (!el) {
       console.info('no image to show');
@@ -31,10 +41,11 @@ function Gallery(gallery) {
     currentImage = el;
     openModal();
   }
-
+  // these are out even listeners
   images.forEach(image =>
     image.addEventListener('click', e => showImage(e.currentTarget))
   );
+  modal.addEventListener('click', handleClickOutside);
 }
 
 // use it on the page
