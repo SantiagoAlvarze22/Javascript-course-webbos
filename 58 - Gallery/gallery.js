@@ -39,9 +39,10 @@ function Gallery(gallery) {
   }
 
   function handleKeyUp(e) {
-    if (e.key === 'Escape') closeModal();
-    if (e.key === 'ArrowRight') showNextImage();
-    if (e.key === 'ArrowLeft') showPrevImage();
+    // return avoid running the function several times, if check some is true stop the other
+    if (e.key === 'Escape') return closeModal();
+    if (e.key === 'ArrowRight') return showNextImage();
+    if (e.key === 'ArrowLeft') return showPrevImage();
   }
 
   function showNextImage() {
@@ -68,6 +69,19 @@ function Gallery(gallery) {
   images.forEach(image =>
     image.addEventListener('click', e => showImage(e.currentTarget))
   );
+
+  // loop over each image
+  images.forEach(image =>
+    // attach an event listener for each image
+    image.addEventListener('keyup', e => {
+      // when that is keyup, check if it was enter
+      if (e.key === 'Enter') {
+        // if it was, show that image
+        showImage(e.currentImage);
+      }
+    })
+  );
+
   modal.addEventListener('click', handleClickOutside);
 }
 
