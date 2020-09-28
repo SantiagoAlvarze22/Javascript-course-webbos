@@ -40,6 +40,8 @@ function Gallery(gallery) {
 
   function handleKeyUp(e) {
     if (e.key === 'Escape') closeModal();
+    if (e.key === 'ArrowRight') showNextImage();
+    if (e.key === 'ArrowLeft') showPrevImage();
   }
 
   function showNextImage() {
