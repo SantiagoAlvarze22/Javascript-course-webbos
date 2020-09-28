@@ -29,6 +29,10 @@ function Gallery(gallery) {
     }
   }
 
+  function handleKeyUp(e) {
+    if (e.key === 'Escape') closeModal();
+  }
+
   function showImage(el) {
     if (!el) {
       console.info('no image to show');
@@ -46,6 +50,7 @@ function Gallery(gallery) {
     image.addEventListener('click', e => showImage(e.currentTarget))
   );
   modal.addEventListener('click', handleClickOutside);
+  window.addEventListener('keyup', handleKeyUp);
 }
 
 // use it on the page
