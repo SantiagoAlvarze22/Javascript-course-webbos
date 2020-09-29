@@ -7,7 +7,20 @@ function Slider(slider) {
   let prev;
   let next;
 
-  // select the element neede for the slider
+  // select the element need for the slider
+  const slides = slider.querySelector('.slides');
+  const prevButton = document.querySelector('.goToPrev');
+  const nextButton = document.querySelector('.goToNext');
+
+  // function to startSlider
+  function startSlider() {
+    current = slider.querySelector('.current') || slides.firstElementChild;
+    prev = current.previousElementSibling || slides.lastElementChild;
+    next = current.nextElementSibling || slides.firstElementChild;
+    console.log({ current, prev, next });
+  }
+  // when this slide is created, run the estart slider function
+  startSlider();
 }
 
 const mySlider = Slider(document.querySelector('.slider'));

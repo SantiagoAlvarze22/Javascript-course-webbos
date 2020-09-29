@@ -126,7 +126,25 @@ function Slider(slider) {
 
   var current;
   var prev;
-  var next;
+  var next; // select the element need for the slider
+
+  var slides = slider.querySelector('.slides');
+  var prevButton = document.querySelector('.goToPrev');
+  var nextButton = document.querySelector('.goToNext'); // function to startSlider
+
+  function startSlider() {
+    current = slider.querySelector('.current') || slides.firstElementChild;
+    prev = current.previousElementSibling || slides.lastElementChild;
+    next = current.nextElementSibling || slides.firstElementChild;
+    console.log({
+      current: current,
+      prev: prev,
+      next: next
+    });
+  } // when this slide is created, run the estart slider function
+
+
+  startSlider();
 }
 
 var mySlider = Slider(document.querySelector('.slider'));
@@ -159,7 +177,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56156" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58379" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
