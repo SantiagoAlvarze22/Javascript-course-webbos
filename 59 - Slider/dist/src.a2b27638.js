@@ -141,10 +141,17 @@ function Slider(slider) {
       prev: prev,
       next: next
     });
+  }
+
+  function applyClasses() {
+    current.classList.add('current');
+    prev.classList.add('prev');
+    next.classList.add('next');
   } // when this slide is created, run the estart slider function
 
 
   startSlider();
+  applyClasses();
 }
 
 var mySlider = Slider(document.querySelector('.slider'));
