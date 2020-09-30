@@ -46,6 +46,10 @@
     const total = bill.calculate(0.13);
     const calc = bill.calculate.bind({ total: 500 }, 0.06);
     console.log(calc());
+
+    // uso de call method
+    const total2 = bill.calculate.call({ total: 500 }, 0.06);
+    console.log(total2);
   </script>
 </body>
 
