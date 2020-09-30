@@ -41,6 +41,13 @@
         console.log(this);
         return this.total + this.total * taxRate;
       },
+      describe(mealType, drinkType, taxRate) {
+        console.log(
+          `Your meal of ${mealType} with a drink of ${drinkType} was ${this.calculate(
+            taxRate
+          )}`
+        );
+      },
     };
 
     const total = bill.calculate(0.13);
@@ -50,6 +57,13 @@
     // uso de call method
     const total2 = bill.calculate.call({ total: 500 }, 0.06);
     console.log(total2);
+
+    // applu method
+    const total3 = bill.calculate.call({ total: 5000 }, 0.06);
+    console.log(total3);
+
+    const myMeal = bill.describe.call(bill, 'pizza', 'beer', 0.13); // several arguments
+    const myMeal2 = bill.describe.apply(bill, ['pizza', 'beer', 0.13]); // as a 1 argument
   </script>
 </body>
 
