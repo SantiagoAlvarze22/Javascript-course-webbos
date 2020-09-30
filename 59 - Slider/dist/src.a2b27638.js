@@ -129,8 +129,8 @@ function Slider(slider) {
   var next; // select the element need for the slider
 
   var slides = slider.querySelector('.slides');
-  var prevButton = document.querySelector('.goToPrev');
-  var nextButton = document.querySelector('.goToNext'); // function to startSlider
+  var prevButton = slider.querySelector('.goToPrev');
+  var nextButton = slider.querySelector('.goToNext'); // function to startSlider
 
   function startSlider() {
     current = slider.querySelector('.current') || slides.firstElementChild;
@@ -163,12 +163,14 @@ function Slider(slider) {
 
     if (direction === 'back') {
       // make an new array of the new values, and destructure them over and into the prev, current and next variables
-      var _ref = [prev.previousElementSibling, prev, current];
+      var _ref = [// get the prev slide, if there is non, get the las slide form the entire slider for wrapping
+      prev.previousElementSibling || slides.lastElementChild, prev, current];
       prev = _ref[0];
       current = _ref[1];
       next = _ref[2];
     } else {
-      var _ref2 = [current, next, next.nextElementSibling];
+      var _ref2 = [current, next, // get the next slide, on if it's at the end, loop around and grab the first
+      next.nextElementSibling || slides.firstElementChild];
       prev = _ref2[0];
       current = _ref2[1];
       next = _ref2[2];

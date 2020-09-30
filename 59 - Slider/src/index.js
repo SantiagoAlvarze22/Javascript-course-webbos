@@ -10,8 +10,8 @@ function Slider(slider) {
 
   // select the element need for the slider
   const slides = slider.querySelector('.slides');
-  const prevButton = document.querySelector('.goToPrev');
-  const nextButton = document.querySelector('.goToNext');
+  const prevButton = slider.querySelector('.goToPrev');
+  const nextButton = slider.querySelector('.goToNext');
 
   // function to startSlider
   function startSlider() {
@@ -35,9 +35,19 @@ function Slider(slider) {
     next.classList.remove(...classesToRemove);
     if (direction === 'back') {
       // make an new array of the new values, and destructure them over and into the prev, current and next variables
-      [prev, current, next] = [prev.previousElementSibling, prev, current];
+      [prev, current, next] = [
+        // get the prev slide, if there is non, get the las slide form the entire slider for wrapping
+        prev.previousElementSibling || slides.lastElementChild,
+        prev,
+        current,
+      ];
     } else {
-      [prev, current, next] = [current, next, next.nextElementSibling];
+      [prev, current, next] = [
+        current,
+        next,
+        // get the next slide, on if it's at the end, loop around and grab the first
+        next.nextElementSibling || slides.firstElementChild,
+      ];
     }
     applyClasses();
   }
