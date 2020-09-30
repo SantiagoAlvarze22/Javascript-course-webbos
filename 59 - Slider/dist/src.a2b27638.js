@@ -179,7 +179,12 @@ function Slider(slider) {
 
 
   startSlider();
-  applyClasses();
+  applyClasses(); // event Listeners
+
+  prevButton.addEventListener('click', function () {
+    return move('back');
+  });
+  nextButton.addEventListener('click', move);
 }
 
 var mySlider = Slider(document.querySelector('.slider'));

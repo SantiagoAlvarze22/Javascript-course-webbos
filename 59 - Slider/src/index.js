@@ -45,6 +45,10 @@ function Slider(slider) {
   // when this slide is created, run the estart slider function
   startSlider();
   applyClasses();
+
+  // event Listeners
+  prevButton.addEventListener('click', () => move('back'));
+  nextButton.addEventListener('click', move);
 }
 
 const mySlider = Slider(document.querySelector('.slider'));
