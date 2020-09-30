@@ -52,7 +52,7 @@ function Slider(slider) {
     applyClasses();
   }
 
-  // when this slide is created, run the estart slider function
+  // when this slide is c reated, run the estart slider function
   startSlider();
   applyClasses();
 

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>New, This, Prototypes and Classes</title>
+  <link rel="stylesheet" href="../base.css">
+</head>
+
+<body>
+  <script>
+    const myDate = new Date('August 11, 2025');
+    console.dir(myDate);
+    console.log(myDate.getFullYear());
+
+    const names = new Array(['wes', 'kait']); // ['wes', 'kait']
+    // names instanceof Array//true
+    const wes = new Object({ name: 'wes' }); // {name: 'wes' }
+    // wes instaceof Object //true
+
+    const span = document.createElement('span');
+
+    function Pizza() {
+      console.log('Making a pizza');
+    }
+
+    const pepperoniPizza = new Pizza(); // create a new object that is instanceof Pizza function
+    console.log(pepperoniPizza);
+    console.log(pepperoniPizza.constructor); // function constructora Pizza
+    console.log(pepperoniPizza instanceof Pizza); // true
+  </script>
+
+</body>
+
+</html>
