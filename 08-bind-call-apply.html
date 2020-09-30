@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Bind Call and Apply!</title>
+  <link rel="stylesheet" href="../base.css">
+</head>
+
+<body>
+  <div class="wrapper">
+    <p>Hey</p>
+  </div>
+  <script>
+    const person = {
+      name: 'wes Bos',
+      sayHi() {
+        console.log(this);
+        console.log(`Hey ${this.name}`);
+        return `Hey ${this.name}`;
+      },
+    };
+
+    const jenna = { name: 'Jenna' };
+    // bind the object to ejenna object and is going to have the same structure as person object but with the values of jenna
+    const sayHi = person.sayHi.bind(jenna);
+
+    // Query selecto Example
+    // by calling bing against querySlector, we say when the $ function is run, use 'document' as 'this' value
+    const $ = document.querySelector.bind(document);
+    const wrapper = document.querySelector('.wrapper');
+    const p = document.querySelector('p');
+    console.log(p);
+    console.log($('p'));
+
+    // another use of bind
+    const bill = {
+      total: 1000,
+      calculate(taxRate) {
+        console.log(this);
+        return this.total + this.total * taxRate;
+      },
+    };
+
+    const total = bill.calculate(0.13);
+    const calc = bill.calculate.bind({ total: 500 }, 0.06);
+    console.log(calc());
+  </script>
+</body>
+
+</html>
