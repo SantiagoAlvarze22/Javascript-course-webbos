@@ -11,12 +11,14 @@
 <body>
   <script>
     function makePizza(toppings) {
-      const pizzaPromise = new Promise(function (resolve, reject) {
-        // when you are ready, you can resolver this promise
-        resolve(`Here is your pizza with the toppings ${toppings.join(' ')}`);
+      return new Promise(function (resolve, reject) {
+        // waiting 1 second for the pizza to cook
+        setTimeout(function () {
+          // when you are ready, you can resolve this promise
+          resolve(`Here is your pizza with the toppings ${toppings.join(' ')}`);
+        }, 1000);
         // if something went wrong, we can reject this promise
       });
-      return pizzaPromise;
     }
     const pepperoniPromise = makePizza(['pepperoni']);
     const canadianPromise = makePizza(['pepperoni', 'mushrooms', 'onions']);
