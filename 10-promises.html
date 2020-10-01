@@ -10,23 +10,71 @@
 
 <body>
   <script>
-    function makePizza(toppings) {
+    function makePizza(toppings = []) {
       return new Promise(function (resolve, reject) {
+        const amountOfTimeToBake = 500 + toppings.length * 200;
         // waiting 1 second for the pizza to cook
         setTimeout(function () {
           // when you are ready, you can resolve this promise
           resolve(`Here is your pizza with the toppings ${toppings.join(' ')}`);
-        }, 1000);
+        }, amountOfTimeToBake);
         // if something went wrong, we can reject this promise
       });
     }
-    const pepperoniPromise = makePizza(['pepperoni']);
-    const canadianPromise = makePizza(['pepperoni', 'mushrooms', 'onions']);
-    console.log(pepperoniPromise, canadianPromise);
+    // const pepperoniPromise = makePizza(['pepperoni']);
+    // const canadianPromise = makePizza(['pepperoni', 'mushrooms', 'onions']);
+    // console.log(pepperoniPromise, canadianPromise);
 
-    // to show the values in a promise I have to use 'then'
-    pepperoniPromise.then(function (pizza) {
-      console.log('yas');
+    // // to show the values in a promise I have to use 'then'
+    // pepperoniPromise.then(function (pizza) {
+    //   console.log('yas');
+    //   console.log(pizza);
+    // });
+
+    // they're cgoing to be show in its order
+    // console.log('Frist');
+    // makePizza(['pepperoni'])
+    //   .then(function (pizza) {
+    //     console.log(pizza);
+    //     return makePizza(['ham', 'cheese']);
+    //   })
+    //   .then(function (pizza) {
+    //     console.log(pizza);
+    //     return makePizza(['peppers', 'cheese', 'onion', 'mushrooms']);
+    //   })
+    //   .then(function (pizza) {
+    //     console.log(pizza);
+    //     return makePizza(['peppers', 'onion', 'mushrooms']);
+    //   })
+    //   .then(function (pizza) {
+    //     console.log(pizza);
+    //   });
+    // console.log('right after');
+
+    // run them concurrently
+    const pizzaPromise1 = makePizza(['peppers', 'cheese', 'onion', 'mushrooms']);
+    const pizzaPromise2 = makePizza(['peppers', 'onion', 'mushrooms']);
+    const pizzaPromise3 = makePizza(['ham', 'cheese']);
+
+    const dinnerPromise = Promise.all([
+      pizzaPromise1,
+      pizzaPromise2,
+      pizzaPromise3,
+    ]);
+    // devuelve todas las promosas por el promise all
+    dinnerPromise.then(([hottie, garbagePail, hamAndChees]) => {
+      console.log([hottie, garbagePail, hamAndChees]);
+    });
+
+    // retorna el primer array y ya despues retorna los 3 juntos
+    const firstPizzaPromise = Promise.race([
+      pizzaPromise1,
+      pizzaPromise2,
+      pizzaPromise3,
+    ]);
+
+    firstPizzaPromise.then(pizza => {
+      console.log(' you r hungggyy');
       console.log(pizza);
     });
   </script>
