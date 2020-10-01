@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Promises</title>
+  <link rel="stylesheet" href="../base.css">
+</head>
+
+<body>
+  <script>
+    function makePizza(toppings) {
+      const pizzaPromise = new Promise(function (resolve, reject) {
+        // when you are ready, you can resolver this promise
+        resolve(`Here is your pizza with the toppings ${toppings.join(' ')}`);
+        // if something went wrong, we can reject this promise
+      });
+      return pizzaPromise;
+    }
+    const pepperoniPromise = makePizza(['pepperoni']);
+    const canadianPromise = makePizza(['pepperoni', 'mushrooms', 'onions']);
+    console.log(pepperoniPromise, canadianPromise);
+
+    // to show the values in a promise I have to use 'then'
+    pepperoniPromise.then(function (pizza) {
+      console.log('yas');
+      console.log(pizza);
+    });
+  </script>
+</body>
+
+</html>
