@@ -78,3 +78,26 @@ async function askQuestion(e) {
 
 const buttons = document.querySelectorAll('[data-question]');
 buttons.forEach(button => button.addEventListener('click', askQuestion));
+
+const question = [
+  { title: 'What is your name?' },
+  { title: 'What is your age?', cancel: true },
+  { title: 'What is your dogs name?' },
+];
+
+async function asyncMap(array, callback) {
+  // make an array to store out results
+  const results = [];
+  // loop over our array
+  for (const item of array) {
+    results.push(await callback(item));
+  }
+  // when we are done the loop, return it
+  return results;
+}
+async function go() {
+  const answers = await asyncMap(question, ask);
+  console.log(answers);
+}
+
+go();
