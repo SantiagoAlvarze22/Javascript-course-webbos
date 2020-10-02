@@ -12,7 +12,7 @@ async function destroyPopup(popup) {
   popup = null;
   /* eslint-enable no-param-reassign */
 
-  //   popup.parentElement.removeChild(popup);
+  // popup.parentElement.removeChild(popup);
 }
 
 function ask(options) {
@@ -36,6 +36,14 @@ function ask(options) {
       skipButton.textContent = 'Cancel';
       popup.firstElementChild.appendChild(skipButton);
       // TODO: LISTEN FOR A CLICK ON THAT CANCEL BUTTON
+      skipButton.addEventListener(
+        'click',
+        function() {
+          resolve(null);
+          destroyPopup(popup);
+        },
+        { once: true }
+      );
     }
     // listen for the submit event on the inputs
     popup.addEventListener(
@@ -45,6 +53,7 @@ function ask(options) {
         resolve(e.target.input.value);
         // remove the addeventlistener once is run {once:true}
         // remove it from the DOM entirely
+        destroyPopup(popup);
       },
       { once: true }
     );
@@ -59,3 +68,13 @@ function ask(options) {
 }
 
 // select all button that ahve a question
+
+async function askQuestion(e) {
+  const button = e.currentTarget;
+  const cancel = 'cancel' in button.dataset;
+  const answer = await ask({ title: button.dataset.question, cancel });
+  console.log(answer);
+}
+
+const buttons = document.querySelectorAll('[data-question]');
+buttons.forEach(button => button.addEventListener('click', askQuestion));
