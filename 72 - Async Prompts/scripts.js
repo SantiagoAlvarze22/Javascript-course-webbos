@@ -1,6 +1,20 @@
 function wait(ms = 0) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+async function destroyPopup(popup) {
+  popup.classList.remove('open');
+  await wait(1000);
+  // remove the popup entirely
+  popup.remove();
+
+  /* eslint-disable no-param-reassign */
+  popup = null;
+  /* eslint-enable no-param-reassign */
+
+  //   popup.parentElement.removeChild(popup);
+}
+
 function ask(options) {
   return new Promise(async function(resolve) {
     // first we need to create a popup with all the fields in it
@@ -30,7 +44,6 @@ function ask(options) {
         e.preventDefault();
         resolve(e.target.input.value);
         // remove the addeventlistener once is run {once:true}
-
         // remove it from the DOM entirely
       },
       { once: true }
@@ -44,3 +57,5 @@ function ask(options) {
     popup.classList.add('open');
   });
 }
+
+// select all button that ahve a question
