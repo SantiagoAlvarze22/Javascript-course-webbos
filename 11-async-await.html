@@ -15,6 +15,23 @@
         setTimeout(resolve, ms);
       });
     }
+
+    function makePizza(toppings = []) {
+      return new Promise(function (resolve, reject) {
+        // reject if people try with pineapple
+        if (toppings.includes('pineapple')) {
+          reject('ewww');
+        }
+        const amountOfTimeToBake = 500 + toppings.length * 200;
+        // waiting 1 second for the pizza to cook
+        setTimeout(function () {
+          // when you are ready, you can resolve this promise
+          resolve(`Here is your pizza with the toppings ${toppings.join(' ')}`);
+        }, amountOfTimeToBake);
+        // if something went wrong, we can reject this promise
+      });
+    }
+
     async function go() {
       console.log('Starting');
       await wait(2000);
@@ -22,7 +39,7 @@
       await wait(2000);
       console.log('ending');
     }
-    go();
+    // go();
     // function declaration, function statement
     async function fd() { }
 
@@ -41,6 +58,15 @@
       // function property
       sayHey: async => { },
     };
+
+    async function makeDinner() {
+      const pizzaPromise1 = makePizza(['pepperoni']);
+      const pizzaPromise2 = makePizza(['pepperoni', 'onion']);
+      const [pep, mus] = await Promise.all([pizzaPromise1, pizzaPromise2]);
+      console.log(pep, mus);
+    }
+
+    makeDinner();
   </script>
 </body>
 
