@@ -22,10 +22,24 @@ async function fetchJoke() {
   return data;
 }
 
+function randomItemFromArray(arr, not) {
+  const item = arr[Math.floor(Math.random() * arr.length)];
+  if (item === not) {
+    console.log('look again');
+    return randomItemFromArray(arr, not);
+  }
+  return item;
+}
+
 async function handleClick() {
   // joke is returned by fetchJoke function in data
   const { joke } = await fetchJoke();
-  console.log(joke);
+  jokeHolder.textContent = joke;
+  // chaging button
+  jokeButton.textContent = randomItemFromArray(
+    buttonText,
+    jokeButton.textContent
+  );
 }
 
 jokeButton.addEventListener('click', handleClick);
