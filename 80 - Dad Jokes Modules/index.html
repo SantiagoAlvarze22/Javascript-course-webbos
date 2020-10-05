@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dad Jokes</title>
+  <link rel="stylesheet" href="../../base.css">
+  <style>
+    html {
+      --size: 20px;
+    }
+
+    .wrapper {
+      text-align: center;
+    }
+
+    .joke {
+      font-size: 5rem;
+      font-weight: 900;
+    }
+
+    .lds-ellipsis {
+      display: inline-block;
+      position: relative;
+
+      width: var(--size);
+      height: var(--size);
+    }
+
+    .lds-ellipsis div {
+      position: absolute;
+      top: calc(var(--size) /2);
+      width: calc(var(--size)*0.4);
+      height: calc(var(--size)*0.4);
+      border-radius: 50%;
+      background: white;
+      animation-timing-function: cubic-bezier(0, 1, 1, 0);
+    }
+
+    .lds-ellipsis div:nth-child(1) {
+      left: 3px;
+      animation: lds-ellipsis1 0.6s infinite;
+    }
+
+    .lds-ellipsis div:nth-child(2) {
+      left: 3px;
+      animation: lds-ellipsis2 0.6s infinite;
+    }
+
+    .lds-ellipsis div:nth-child(3) {
+      left: 9px;
+      animation: lds-ellipsis2 0.6s infinite;
+    }
+
+    .lds-ellipsis div:nth-child(4) {
+      left: 21px;
+      animation: lds-ellipsis3 0.6s infinite;
+    }
+
+    @keyframes lds-ellipsis1 {
+      0% {
+        transform: scale(0);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes lds-ellipsis3 {
+      0% {
+        transform: scale(1);
+      }
+
+      100% {
+        transform: scale(0);
+      }
+    }
+
+    @keyframes lds-ellipsis2 {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      100% {
+        transform: translate(24px, 0);
+      }
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="joke">
+      <p>Dad Jokes.</p>
+    </div>
+    <button class="getJoke">
+      <span class="jokeText">Get A Joke</span>
+      <div class="lds-ellipsis loader hidden ">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </button>
+  </div>
+
+  <script src="./jokes.js" type="module"></script>
+</body>
+
+</html>
