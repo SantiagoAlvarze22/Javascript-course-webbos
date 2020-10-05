@@ -118606,6 +118606,17 @@ async function go() {
   await (0, _waait.default)(200);
   console.log('ending');
 } // go();
+
+
+const diff = (0, _dateFns.formatDistance)(new Date(), new Date(2020, 3, 4, 10, 32, 0), {
+  addSuffix: true
+}); //= > 'in about 1 hour
+
+console.log(diff);
+const date = new Date(); // Janurary the 12th 2020
+
+const formatted = (0, _dateFns.format)(date, `LLLL 'the' do y`);
+console.log(formatted);
 },{"waait":"node_modules/waait/index.js","faker":"node_modules/faker/index.js","date-fns":"node_modules/date-fns/esm/index.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
