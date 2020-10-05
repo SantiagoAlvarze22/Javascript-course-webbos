@@ -1,6 +1,7 @@
 import wait from 'waait';
 import { name } from 'faker';
 import { formatDistance, format } from 'date-fns';
+import axios from 'axios';
 
 // console.log(`hello ${name.firstName()}`);
 const fakeNames = Array.from(
@@ -8,7 +9,7 @@ const fakeNames = Array.from(
   () => `${name.firstName()} ${name.lastName()}`
 );
 
-console.log(fakeNames);
+// console.log(fakeNames);
 
 async function go() {
   console.log('going');
@@ -21,10 +22,21 @@ async function go() {
 const diff = formatDistance(new Date(), new Date(2020, 3, 4, 10, 32, 0), {
   addSuffix: true,
 }); //= > 'in about 1 hour
-console.log(diff);
+// console.log(diff);
 
 const date = new Date();
 
 // Janurary the 12th 2020
 const formatted = format(date, `LLLL 'the' do y`);
-console.log(formatted);
+// console.log(formatted);
+
+async function getJoke() {
+  const { data } = await axios.get('https://icanhazdadjoke.com', {
+    headers: {
+      Accept: 'application/json',
+    },
+  });
+  console.log(data);
+}
+
+getJoke();
