@@ -2,6 +2,7 @@ import wait from 'waait';
 import { name } from 'faker';
 import { formatDistance, format } from 'date-fns';
 import axios from 'axios';
+import { intersection, isEqual } from 'lodash';
 
 // console.log(`hello ${name.firstName()}`);
 const fakeNames = Array.from(
@@ -40,3 +41,14 @@ async function getJoke() {
 }
 
 getJoke();
+
+const a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const b = [5, 3, 8, 3, 7, 453, 34];
+
+const sameValues = intersection(a, b);
+console.log(sameValues);
+
+const person1 = { name: 'wes' };
+const person2 = { name: 'wes' };
+
+console.log(isEqual(person1, person2));
