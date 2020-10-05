@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel index.html"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +16,10 @@
     "axios": "^0.20.0",
     "date-fns": "^2.16.1",
     "faker": "^5.1.0",
-    "lodash": "^4.17.20"
-  }
+    "lodash": "^4.17.20",
+    "waait": "^1.0.5"
+  },
+  "browserslist": [
+    "last 1 chrome versions"
+  ]
 }
