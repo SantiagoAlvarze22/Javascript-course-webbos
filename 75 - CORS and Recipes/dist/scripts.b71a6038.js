@@ -121,6 +121,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 const baseEndpoint = 'http://www.recipepuppy.com/api';
 const proxy = `https://cors-anywhere.herokuapp.com/`;
 const form = document.querySelector('form.search');
+const recipesGrid = document.querySelector('.recipes');
 
 async function fetchRecipes(query) {
   const res = await fetch(`${proxy}${baseEndpoint}/?q=${query}`);
@@ -128,19 +129,35 @@ async function fetchRecipes(query) {
   return data;
 }
 
-async function handleSubmit(e) {
-  e.preventDefault();
-  const el = e.currentTarget; // turn the form off
-
-  el.submit.disabled = true; // submit the search
-
-  const recipes = await fetchRecipes(el.query.value);
-  console.log(recipes);
-  el.submit.disabled = false;
+function displayRecipes(recipes) {
+  const html = recipes.map(recipe => `
+    <div class="recipe">
+        <h2>${recipe.title}</h2>
+        <p>${recipe.ingredients}</p>
+        ${recipe.thumbnail && `<img src="${recipe.thumbnail}" alt="${recipe.title}"/>`}
+          <a class="link" href="${recipe.href}"> View Recipe </a>
+    </div>`);
+  recipesGrid.innerHTML = html.join('');
 }
 
-form.addEventListener('submit', handleSubmit);
-fetchRecipes('pizza');
+async function fetchAndDisplay(query) {
+  // turn the form off
+  form.submit.disabled = true; // submit the search
+
+  const recipes = await fetchRecipes(query);
+  console.log(recipes);
+  form.submit.disabled = false;
+  displayRecipes(recipes.results);
+}
+
+async function handleSubmit(e) {
+  e.preventDefault();
+  fetchAndDisplay(form.query.value);
+}
+
+form.addEventListener('submit', handleSubmit); // on page load run it with pizza
+
+fetchAndDisplay('pizza');
 },{}],"../../../Users/santi/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
