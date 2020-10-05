@@ -9,13 +9,17 @@
   <style>.search {
       display: grid;
       grid-template-columns: 1fr;
+    }
+
+    button[disabled] {
+      opacity: 0.2;
     }</style>
 <script src="/base.1b666e52.js"></script></head>
 
 <body>
   <div class="wrapper">
     <form class="search" autocomplete="off">
-      <input type="text" name="query">
+      <input type="text" name="query" value="pizza">
       <button name="submit" type="submit">Submit</button>
     </form>
     <div class="recipes"></div>
