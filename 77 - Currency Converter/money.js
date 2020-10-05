@@ -71,6 +71,15 @@ async function convert(amount, from, to) {
   const rate = ratesByBase[from].rates[to];
   const convertedAmount = rate * amount;
   console.log(`${amount} ${from} is ${convertedAmount} in ${to}`);
+  return convertedAmount;
+}
+
+// format the output value
+function formatCurrency(amount, currency) {
+  return Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency,
+  }).format(amount);
 }
 
 async function handleInput(e) {
@@ -79,8 +88,8 @@ async function handleInput(e) {
     fromSelect.value,
     toSelect.value
   );
-  console.log(rawAmount);
-  // toEl.textContent = rawAmount;
+
+  toEl.textContent = formatCurrency(rawAmount, toSelect.value);
 }
 
 const optionsHTML = generateOptions(currencies);
