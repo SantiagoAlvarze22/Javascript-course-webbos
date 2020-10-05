@@ -3,6 +3,7 @@ import { name } from 'faker';
 import { formatDistance, format } from 'date-fns';
 import axios from 'axios';
 import { intersection, isEqual } from 'lodash';
+import to from 'await-to-js';
 
 // console.log(`hello ${name.firstName()}`);
 const fakeNames = Array.from(
@@ -52,3 +53,23 @@ const person1 = { name: 'wes' };
 const person2 = { name: 'wes' };
 
 console.log(isEqual(person1, person2));
+
+function checkIfNameIsCool(firstName) {
+  return new Promise(function(resolve, reject) {
+    if (firstName === 'Wes') {
+      resolve('Cool name');
+      return;
+    }
+    reject(new Error('Bad Name'));
+  });
+}
+
+async function checkName() {
+  const [err, successValue] = await to(checkIfNameIsCool('3Wes'));
+  if (err) {
+    console.log(err);
+  } else {
+    console.log(successValue);
+  }
+}
+checkName();

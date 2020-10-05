@@ -139580,7 +139580,35 @@ var define;
   }
 }.call(this));
 
-},{"buffer":"node_modules/buffer/index.js"}],"index.js":[function(require,module,exports) {
+},{"buffer":"node_modules/buffer/index.js"}],"node_modules/await-to-js/dist/await-to-js.es5.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.to = to;
+exports.default = void 0;
+
+/**
+ * @param { Promise } promise
+ * @param { Object= } errorExt - Additional Information you can pass to the err object
+ * @return { Promise }
+ */
+function to(promise, errorExt) {
+  return promise.then(function (data) {
+    return [null, data];
+  }).catch(function (err) {
+    if (errorExt) {
+      Object.assign(err, errorExt);
+    }
+
+    return [err, undefined];
+  });
+}
+
+var _default = to;
+exports.default = _default;
+},{}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _waait = _interopRequireDefault(require("waait"));
@@ -139592,6 +139620,8 @@ var _dateFns = require("date-fns");
 var _axios = _interopRequireDefault(require("axios"));
 
 var _lodash = require("lodash");
+
+var _awaitToJs = _interopRequireDefault(require("await-to-js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -139639,7 +139669,30 @@ const person2 = {
   name: 'wes'
 };
 console.log((0, _lodash.isEqual)(person1, person2));
-},{"waait":"node_modules/waait/index.js","faker":"node_modules/faker/index.js","date-fns":"node_modules/date-fns/esm/index.js","axios":"node_modules/axios/index.js","lodash":"node_modules/lodash/lodash.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+function checkIfNameIsCool(firstName) {
+  return new Promise(function (resolve, reject) {
+    if (firstName === 'Wes') {
+      resolve('Cool name');
+      return;
+    }
+
+    reject(new Error('Bad Name'));
+  });
+}
+
+async function checkName() {
+  const [err, successValue] = await (0, _awaitToJs.default)(checkIfNameIsCool('3Wes'));
+
+  if (err) {
+    console.log(err);
+  } else {
+    console.log(successValue);
+  }
+}
+
+checkName();
+},{"waait":"node_modules/waait/index.js","faker":"node_modules/faker/index.js","date-fns":"node_modules/date-fns/esm/index.js","axios":"node_modules/axios/index.js","lodash":"node_modules/lodash/lodash.js","await-to-js":"node_modules/await-to-js/dist/await-to-js.es5.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
