@@ -117,7 +117,45 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"sound.js":[function(require,module,exports) {
+})({"utils.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.hslToRgb = hslToRgb;
+
+function hslToRgb(h, s, l) {
+  let r;
+  let g;
+  let b;
+
+  if (s == 0) {
+    r = g = b = l; // achromatic
+  } else {
+    const hue2rgb = function hue2rgb(p, q, t) {
+      if (t < 0) t += 1;
+      if (t > 1) t -= 1;
+      if (t < 1 / 6) return p + (q - p) * 6 * t;
+      if (t < 1 / 2) return q;
+      if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+      return p;
+    };
+
+    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    const p = 2 * l - q;
+    r = hue2rgb(p, q, h + 1 / 3);
+    g = hue2rgb(p, q, h);
+    b = hue2rgb(p, q, h - 1 / 3);
+  }
+
+  return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+}
+},{}],"sound.js":[function(require,module,exports) {
+"use strict";
+
+var _utils = require("./utils");
+
 const WIDTH = 1500;
 const HEIGHT = 1500;
 const canvas = document.querySelector('canvas');
@@ -131,31 +169,10 @@ function handleError() {
   console.log('error');
 }
 
-async function getAudio() {
-  const stream = await navigator.mediaDevices.getUserMedia({
-    audio: true
-  }).catch(handleError);
-  const audioCtx = new AudioContext();
-  analyzer = audioCtx.createAnalyser();
-  const source = audioCtx.createMediaStreamSource(stream);
-  source.connect(analyzer); // How much data should we collect
-
-  analyzer.fftSize = 2 ** 10; // repeticiones de la serie de fourier, intensidad de las ondas
-  // pull the data off the audio
-  // how many pieces of data are there?
-
-  bufferLength = analyzer.frequencyBinCount;
-  const timeData = new Uint8Array(bufferLength);
-  console.log(timeData);
-  const frequencyData = new Uint8Array(bufferLength); //   console.log(frequencyData);
-
-  drawTimeData(timeData);
-}
-
 function drawTimeData(timeData) {
   //   inject the time data in our timeData
-  analyzer.getByteTimeDomainData(timeData);
-  console.log(timeData); // now that we have the data lets turn it into something visual
+  analyzer.getByteTimeDomainData(timeData); //   console.log(timeData);
+  // now that we have the data lets turn it into something visual
   // 1. clear the canvasTODO
 
   ctx.clearRect(0, 0, WIDTH, HEIGHT); // 2. set up some canvas drawing
@@ -176,14 +193,59 @@ function drawTimeData(timeData) {
     }
 
     x += sliceWidth;
-  });
+  }); //   console.log(sliceWidth);
+
   ctx.stroke(); // call itself as soon as possible
 
   requestAnimationFrame(() => drawTimeData(timeData));
 }
 
+function drawFrequency(frequencyData) {
+  // get the frequency data into our frequencydata array
+  analyzer.getByteFrequencyData(frequencyData); // figure out bar width
+
+  const barWidth = WIDTH / bufferLength * 2.5;
+  console.log(barWidth);
+  let x = 0;
+  frequencyData.forEach(amount => {
+    // 0 to 255
+    const percent = amount / 255;
+    const [h, s, l] = [360 / (percent * 360), 0.8, 0.5];
+    const barHeight = HEIGHT * percent / 2; // TODO: convert the colour to HSL todo
+
+    const [r, g, b] = (0, _utils.hslToRgb)(h, s, l);
+    ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+    ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
+    x += barWidth + 1;
+  }); //   console.log(frequencyData);
+
+  requestAnimationFrame(() => drawFrequency(frequencyData));
+}
+
+async function getAudio() {
+  const stream = await navigator.mediaDevices.getUserMedia({
+    audio: true
+  }).catch(handleError);
+  const audioCtx = new AudioContext();
+  analyzer = audioCtx.createAnalyser();
+  const source = audioCtx.createMediaStreamSource(stream);
+  source.connect(analyzer); // How much data should we collect
+
+  analyzer.fftSize = 2 ** 10; // repeticiones de la serie de fourier, intensidad de las ondas
+  // pull the data off the audio
+  // how many pieces of data are there?
+
+  bufferLength = analyzer.frequencyBinCount;
+  const timeData = new Uint8Array(bufferLength); //   console.log(timeData);
+
+  const frequencyData = new Uint8Array(bufferLength); //   console.log(frequencyData);
+
+  drawTimeData(timeData);
+  drawFrequency(frequencyData);
+}
+
 getAudio();
-},{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./utils":"utils.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -211,7 +273,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50288" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59671" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
