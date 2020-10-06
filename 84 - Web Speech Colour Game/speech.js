@@ -1,9 +1,23 @@
 import { handleResult } from './handlers';
-import { colorsByLength } from './colors';
+import { colorsByLength, isDark } from './colors';
+
+const colorsEl = document.querySelector('.colors');
+
+function displayColors(colors) {
+  return colors
+    .map(
+      color =>
+        `<span class="color" ${
+          isDark(color) ? 'dark' : ''
+        } style="background:${color}">${color}</span>`
+    )
+    .join('');
+}
 
 window.SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 
+// asking to the browser for mic permissions
 function start() {
   // see if their browser supports this
   if (!('SpeechRecognition' in window)) {
@@ -20,4 +34,5 @@ function start() {
   recognition.start();
 }
 
-start();
+// start();
+colorsEl.innerHTML = displayColors(colorsByLength);

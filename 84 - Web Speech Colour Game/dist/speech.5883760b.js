@@ -310,7 +310,13 @@ var _handlers = require("./handlers");
 
 var _colors = require("./colors");
 
-window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const colorsEl = document.querySelector('.colors');
+
+function displayColors(colors) {
+  return colors.map(color => `<span class="color" ${(0, _colors.isDark)(color) ? 'dark' : ''} style="background:${color}">${color}</span>`).join('');
+}
+
+window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition; // asking to the browser for mic permissions
 
 function start() {
   // see if their browser supports this
@@ -328,9 +334,10 @@ function start() {
   recognition.onresult = _handlers.handleResult; // onresult bc addEventListener does not exist
 
   recognition.start();
-}
+} // start();
 
-start();
+
+colorsEl.innerHTML = displayColors(_colors.colorsByLength);
 },{"./handlers":"handlers.js","./colors":"colors.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
