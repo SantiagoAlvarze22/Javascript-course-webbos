@@ -157,8 +157,14 @@ export function isDark(colorName) {
   return r * 0.299 + g * 0.587 + b * 0.114 < 120;
 }
 
+// organize the color object by the length of the name
 export const colorsByLength = Object.keys(colors).sort(
   (a, b) => a.length - b.length
 );
 
-console.log(colorsByLength);
+// to validate if some color is real
+export function isValidColor(word) {
+  return !!colors[word];
+}
+
+window.colors = colors;

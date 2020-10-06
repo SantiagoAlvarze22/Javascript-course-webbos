@@ -117,28 +117,14 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"handlers.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.handleResult = handleResult;
-
-function logWords(results) {
-  console.log(results[results.length - 1][0].transcript);
-}
-
-function handleResult(e) {
-  logWords(e.results);
-}
-},{}],"colors.js":[function(require,module,exports) {
+})({"colors.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.isDark = isDark;
+exports.isValidColor = isValidColor;
 exports.colorsByLength = exports.colors = void 0;
 const colors = {
   black: '#000000',
@@ -298,12 +284,53 @@ function isDark(colorName) {
   const g = parseInt(hex.substring(2, 4), 16);
   const b = parseInt(hex.substring(4, 6), 16);
   return r * 0.299 + g * 0.587 + b * 0.114 < 120;
+} // organize the color object by the length of the name
+
+
+const colorsByLength = Object.keys(colors).sort((a, b) => a.length - b.length); // to validate if some color is real
+
+exports.colorsByLength = colorsByLength;
+
+function isValidColor(word) {
+  return !!colors[word];
 }
 
-const colorsByLength = Object.keys(colors).sort((a, b) => a.length - b.length);
-exports.colorsByLength = colorsByLength;
-console.log(colorsByLength);
-},{}],"speech.js":[function(require,module,exports) {
+window.colors = colors;
+},{}],"handlers.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.handleResult = handleResult;
+
+var _colors = require("./colors");
+
+function logWords(results) {// console.log(results[results.length - 1][0].transcript);
+}
+
+function handleResult({
+  results
+}) {
+  logWords(results);
+  const words = results[results.length - 1][0].transcript; // console.log(words);
+  // lowercase everything
+
+  let color = words.toLowerCase(); // strip any spaces out
+
+  color = color.replace(/\s/g, '');
+  if (!(0, _colors.isValidColor)(color)) return; // that's all
+  // if it is, then show the UI for that
+
+  const colorSpan = document.querySelector(`.${color}`);
+  colorSpan.classList.add('got');
+  console.log(colorSpan);
+  console.log('this is a valid color');
+  console.log(color); // change the background color
+
+  document.body.style.backgroundColor = color;
+}
+},{"./colors":"colors.js"}],"speech.js":[function(require,module,exports) {
 "use strict";
 
 var _handlers = require("./handlers");
@@ -313,7 +340,7 @@ var _colors = require("./colors");
 const colorsEl = document.querySelector('.colors');
 
 function displayColors(colors) {
-  return colors.map(color => `<span class="color" ${(0, _colors.isDark)(color) ? 'dark' : ''} style="background:${color}">${color}</span>`).join('');
+  return colors.map(color => `<span class="color ${color}" ${(0, _colors.isDark)(color) ? 'dark' : ''} style="background:${color}">${color}</span>`).join('');
 }
 
 window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition; // asking to the browser for mic permissions
@@ -334,9 +361,9 @@ function start() {
   recognition.onresult = _handlers.handleResult; // onresult bc addEventListener does not exist
 
   recognition.start();
-} // start();
+}
 
-
+start();
 colorsEl.innerHTML = displayColors(_colors.colorsByLength);
 },{"./handlers":"handlers.js","./colors":"colors.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -366,7 +393,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50769" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53081" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
